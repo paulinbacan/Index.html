@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Floresta dos Mistérios</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #071f16, #164b32, #286443);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.65);
+            max-width: 700px;
+            width: 100%;
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+            border: 2px solid #7cba79;
+        }
+
+        h1 {
+            color: #a8f0a0;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .imagem {
+            font-size: 65px;
+            margin: 15px;
+        }
+
+        h2 {
+            color: #c4f5b8;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 17px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        #opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        button {
+            background: #32834d;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #58b96f;
+            transform: scale(1.03);
+        }
+
+        .reiniciar {
+            background: #a87931;
+            margin-top: 20px;
+        }
+
+        .reiniciar:hover {
+            background: #d49a43;
+        }
+
+        footer {
+            margin-top: 25px;
+            color: #b5d9b2;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🌳 A Floresta dos Mistérios 🌳</h1>
+
+        <div class="imagem" id="imagem">🌲🌳🌲</div>
+
+        <h2 id="titulo">Uma aventura começa!</h2>
+
+        <p id="historia">
+            Você é um explorador que encontrou um mapa misterioso.
+            Ele mostra o caminho para um tesouro escondido em uma
+            floresta desconhecida.
+
+            Ao chegar à entrada da floresta, você percebe que existem
+            dois caminhos. Qual deles você vai escolher?
+        </p>
+
+        <div id="opcoes">
+            <button onclick="escolher('rio')">
+                🌊 Seguir pelo caminho do rio
+            </button>
+
+            <button onclick="escolher('caverna')">
+                🪨 Explorar a caverna escura
+            </button>
+        </div>
+
+        <footer>
+            Uma aventura onde cada escolha muda o destino!
+        </footer>
+
+    </div>
+
+    <script>
+
+        const titulo = document.getElementById("titulo");
+        const historia = document.getElementById("historia");
+        const opcoes = document.getElementById("opcoes");
+        const imagem = document.getElementById("imagem");
+
+        function mostrar(tituloNovo, texto, emoji, botoes) {
+
+            titulo.innerText = tituloNovo;
+            historia.innerText = texto;
+            imagem.innerText = emoji;
+
+            opcoes.innerHTML = "";
+
+            botoes.forEach(botao => {
+                const novoBotao = document.createElement("button");
+
+                novoBotao.innerText = botao.texto;
+                novoBotao.onclick = botao.acao;
+
+                opcoes.appendChild(novoBotao);
+            });
+        }
+
+        function escolher(caminho) {
+
+            if (caminho === "rio") {
+
+                mostrar(
+                    "O caminho do rio",
+                    "Você segue o barulho da água e encontra uma ponte de madeira. Ela parece antiga e perigosa. O que você vai fazer?",
+                    "🌊🌉",
+                    [
+                        {
+                            texto: "Atravessar a ponte",
+                            acao: () => escolher("ponte")
+                        },
+                        {
+                            texto: "Procurar outro caminho",
+                            acao: () => escolher("atalho")
+                        }
+                    ]
+                );
+
+            } else if (caminho === "caverna") {
+
+                mostrar(
+                    "A caverna misteriosa",
+                    "Você entra na caverna e encontra uma tocha acesa e uma passagem secreta. Qual será sua escolha?",
+                    "🕯️🦇",
+                    [
+                        {
+                            texto: "Pegar a tocha e seguir",
+                            acao: () => escolher("tocha")
+                        },
+                        {
+                            texto: "Entrar na passagem secreta",
+                            acao: () => escolher("secreta")
+                        }
+                    ]
+                );
+
+            } else if (caminho === "ponte") {
+
+                mostrar(
+                    "A ponte perigosa",
+                    "Você atravessa a ponte com cuidado e encontra um baú brilhante do outro lado. Dentro dele está o tesouro perdido! Você conseguiu!",
+                    "🏆💎",
+                    [
+                        {
+                            texto: "Ver o final",
+                            acao: () => escolher("vitoria")
+                        }
+                    ]
+                );
+
+            } else if (caminho === "atalho") {
+
+                mostrar(
+                    "O caminho escondido",
+                    "Você encontra um atalho cheio de flores e chega a uma clareira. Um pássaro mágico aparece e oferece ajuda para encontrar o tesouro.",
+                    "🦜🌸",
+                    [
+                        {
+                            texto: "Aceitar a ajuda",
+                            acao: () => escolher("ajuda")
+                        },
+                        {
+                            texto: "Continuar sozinho",
+                            acao: () => escolher("sozinho")
+                        }
+                    ]
+                );
+
+            } else if (caminho === "tocha") {
+
+                mostrar(
+                    "A luz da esperança",
+                    "Com a tocha, você ilumina a caverna e encontra uma porta de pedra. Atrás dela existe uma sala cheia de moedas de ouro!",
+                    "🔥🪙",
+                    [
+                        {
+                            texto: "Abrir a porta",
+                            acao: () => escolher("vitoria")
+                        }
+                    ]
+                );
+
+            } else if (caminho === "secreta") {
+
+                mostrar(
+                    "O segredo da floresta",
+                    "Você entra na passagem e encontra um labirinto. Infelizmente, escolhe o caminho errado e acaba preso em uma sala misteriosa!",
+                    "🌀😮",
+                    [
+                        {
+                            texto: "Tentar novamente",
+                            acao: () => escolher("inicio")
+                        }
+                    ]
+                );
+
+            } else if (caminho === "ajuda") {
+
+                mostrar(
+                    "O amigo mágico",
+                    "O pássaro guia você até uma árvore gigante. Dentro dela está escondido um baú com o tesouro da floresta. Você venceu!",
+                    "🌳🏆",
+                    [
+                        {
+                            texto: "Ver o final",
+                            acao: () => escolher("vitoria")
+                        }
+                    ]
+                );
+
+            } else if (caminho === "sozinho") {
+
+                mostrar(
+                    "Uma surpresa inesperada",
+                    "Você continua sozinho, mas se perde na floresta. Quando está quase desistindo, encontra uma saída secreta e consegue voltar para casa em segurança. O tesouro continuará esperando!",
+                    "🌲🏡",
+                    [
+                        {
+                            texto: "Tentar novamente",
+                            acao: () => escolher("inicio")
+                        }
+                    ]
+                );
+
+            } else if (caminho === "vitoria") {
+
+                mostrar(
+                    "Parabéns, aventureiro!",
+                    "Você superou os desafios, fez suas escolhas e encontrou o tesouro perdido! Sua coragem fez de você o grande explorador da Floresta dos Mistérios. FIM!",
+                    "🏆🎉💎",
+                    [
+                        {
+                            texto: "Jogar novamente",
+                            acao: () => escolher("inicio")
+                        }
+                    ]
+                );
+
+            } else if (caminho === "inicio") {
+
+                mostrar(
+                    "Uma aventura começa!",
+                    "Você é um explorador que encontrou um mapa misterioso. Ele mostra o caminho para um tesouro escondido em uma floresta desconhecida. Ao chegar à entrada da floresta, existem dois caminhos. Qual deles você vai escolher?",
+                    "🌲🌳🌲",
+                    [
+                        {
+                            texto: "🌊 Seguir pelo caminho do rio",
+                            acao: () => escolher("rio")
+                        },
+                        {
+                            texto: "🪨 Explorar a caverna escura",
+                            acao: () => escolher("caverna")
+                        }
+                    ]
+                );
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>
